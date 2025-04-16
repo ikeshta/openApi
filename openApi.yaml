@@ -1,0 +1,413 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Sure Connects API
+  description: |
+    This document provides detailed documentation for the API endpoint responsible for sending messages through the messaging service.
+    This API allows users to send messages to one or more destinations with customizable options.
+  termsOfService: https://mohamedfahmy.docs.apiary.io/#reference
+  contact:
+    name: Sure Connects
+    url: https://sureconnects.com
+    email: sure@sure.com.sa
+  license:
+    name: SureConnects License
+    url: http://license.foo.com
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/MOHMEDFAHMYALI_1/SureConnects/1.0.0
+paths:
+  /SendOTPMessage:
+    post:
+      summary: Send message to a destination
+      tags:
+        - Message
+      parameters:
+        - name: email
+          in: header
+          description: User email registered in the system
+          schema:
+            type: string
+        - name: apiKey
+          in: header
+          description: API key registered in the system
+          schema:
+            type: string
+      description: Send OTP message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sender:
+                  type: string
+                  example: test
+                message:
+                  type: string
+                  example: Hello test from API
+                messageInfo:
+                  type: object
+                  properties:
+                    distination:
+                      type: string
+                      example: 53*******
+      responses:
+        '200':
+          description: Successful sending
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  confirm:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                  modelStateErrors:
+                    type: array
+                    items: {}
+                  success:
+                    type: boolean
+                    example: true
+                  value:
+                    type: object
+                    properties:
+                      messageId:
+                        type: string
+                        example: eb3e439e-30d8-42e0-b802-2b9db484775e
+                      status:
+                        type: string
+                        example: 1000
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  confirm:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                  modelStateErrors:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                          example: Error Description
+                        value:
+                          type: string
+                          example: Error code
+                  success:
+                    type: boolean
+                    example: false
+                  value:
+                    type: object
+                    example: null
+        '401':
+          description: Invalid user permissions
+
+  /SendMessage:
+    post:
+      summary: Send message to multiple destinations
+      tags:
+        - Message
+      parameters:
+        - name: email
+          in: header
+          description: User email registered in the system
+          schema:
+            type: string
+        - name: apiKey
+          in: header
+          description: API key registered in the system
+          schema:
+            type: string
+      description: Send message to multiple destinations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sender:
+                  type: string
+                  example: test
+                message:
+                  type: string
+                  example: Hello test from API
+                messageInfos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      distination:
+                        type: string
+                        example: 53*******
+                      customMessage:
+                        type: string
+                        example: Custom message for a specific destination
+                filterRepeatedNumbers:
+                  type: boolean
+                  example: false
+                requestDeliveryReport:
+                  type: boolean
+                  example: false
+      responses:
+        '200':
+          description: Successful sending
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  confirm:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                  modelStateErrors:
+                    type: array
+                    items: {}
+                  success:
+                    type: boolean
+                    example: true
+                  value:
+                    type: object
+                    properties:
+                      messageId:
+                        type: string
+                        example: eb3e439e-30d8-42e0-b802-2b9db484775e
+                      status:
+                        type: string
+                        example: 1000
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  confirm:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                  modelStateErrors:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                          example: Error description
+                        value:
+                          type: string
+                          example: Error code
+                  success:
+                    type: boolean
+                    example: false
+                  value:
+                    type: object
+                    example: null
+        '401':
+          description: Invalid user permissions
+
+  /SendMessageQuery:
+    post:
+      summary: Send message to a destination via query parameters
+      tags:
+        - Message
+      parameters:
+        - name: email
+          in: header
+          description: User email registered in the system
+          schema:
+            type: string
+        - name: apiKey
+          in: header
+          description: API key registered in the system
+          schema:
+            type: string
+        - name: sender
+          in: query
+          required: true
+          description: Sender name
+          schema:
+            type: string
+        - name: message
+          in: query
+          required: true
+          description: Message to send
+          schema:
+            type: string
+        - name: distination
+          in: query
+          required: true
+          description: Phone number with country code prefix
+          schema:
+            type: string
+            example: 96653*******
+      description: Send OTP message using query parameters
+      responses:
+        '200':
+          description: Successful sending
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  confirm:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                  modelStateErrors:
+                    type: array
+                    items: {}
+                  success:
+                    type: boolean
+                    example: true
+                  value:
+                    type: object
+                    properties:
+                      messageId:
+                        type: string
+                        example: eb3e439e-30d8-42e0-b802-2b9db484775e
+                      status:
+                        type: string
+                        example: 1000
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  confirm:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                  modelStateErrors:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                          example: Error description
+                        value:
+                          type: string
+                          example: Error code
+                  success:
+                    type: boolean
+                    example: false
+                  value:
+                    type: object
+                    example: null
+        '401':
+          description: Invalid user permissions
+
+  /SendWhatsAppTemplateMessage:
+    post:
+      summary: Send WhatsApp template message
+      tags:
+        - WhatsApp
+      description: Send WhatsApp template message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  from:
+                    type: string
+                    example: +966******
+                  to:
+                    type: string
+                    example: +966******
+                  messageId:
+                    type: string
+                    format: uuid
+                    example: b5e551dd-2874-496f-8e09-a1d5471c3f77
+                  content:
+                    type: object
+                    properties:
+                      templateName:
+                        type: string
+                        example: template_name
+                      templateData:
+                        type: object
+                        properties:
+                          body:
+                            type: object
+                            properties:
+                              placeholders:
+                                type: array
+                                items:
+                                  type: object
+                      language:
+                        type: string
+                        example: en_GB
+                  notifyUrl:
+                    type: string
+                    example: https://www.example.com/whatsapp
+      responses:
+        '200':
+          description: Successful sending
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  confirm:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                  modelStateErrors:
+                    type: array
+                    items: {}
+                  success:
+                    type: boolean
+                    example: true
+                  value:
+                    type: object
+                    properties:
+                      messageId:
+                        type: string
+                        example: eb3e439e-30d8-42e0-b802-2b9db484775e
+                      status:
+                        type: string
+                        example: 1000
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  confirm:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                  modelStateErrors:
+                    type: array
+                    items: {}
+                  success:
+                    type: boolean
+                    example: false
+                  value:
+                    type: object
+                    example: null
+        '401':
+          description: Invalid user permissions
