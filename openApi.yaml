@@ -142,6 +142,9 @@ paths:
                 message:
                   type: string
                   example: Hello test from API
+                messageTypeId:
+                  type: number
+                  example: 1
                 messageInfos:
                   type: array
                   items:
