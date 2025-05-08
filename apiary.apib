@@ -1,0 +1,136 @@
+FORMAT: 1A
+HOST: https://api.sureconnects.com/api/Message/
+
+# Sure Connect 
+
+Sure Connect SMS API is a simple way to send unlimited SMSs (Single & Bulk), schedule messages, deliver notifications, and personalize your communication.
+This document provides information and resources for integrating Sure Connect via the HTTP interface, outlining the necessary parameters and instructions for using the SMS API effectively.
+
+## HTTP(s) URL
+
+The SMS API is accessible through an HTTP connection (and its secure version) using the following base URLs for POST requests: 
+Primary URLs: https://api.sureconnects.com/api/Message
+
+## HTTP(s) Authentication:
+
+The Sure Connect SMS API requires user authentication for every URL call submitted.
+This authentication process is facilitated through a unique API key assigned to each user.
+To ensure proper access, users should provide the API key as part of the submission process.
+
+###To get the authentication key:
+Log in to our client portal https://console.sureconnects.com/auth/login
+From the main menu, open “Integration Settings/API Key”.
+In the field "Application Name," please enter a title for your system. 
+Click the “Save” button.
+The key will be automatically generated.
+###Use the authentication key that was generated in the previous step as follows:
+#### In the request header 
+##### email: your account email
+##### apiKey: YourApiKey 
+
+## Send OTP Message [/SendOTPMessage]
+
+### SendOTPMessage [POST]
+
+ + Headers
+
+            email: email
+            apiKey: apiKey
+            
+            
++ Request (application/json)
+
+        {
+            "sender": "sender_name",
+            "message":"Hello test from API",
+            "messageTypeId":3,
+            "messageInfo": {
+                "distination": "53*******"
+             }
+        }
+        
++ Response 200 (application/json)
+
+        {   
+            "confirm": false,
+            "message": "string",
+            "modelStateErrors": [
+               "string"
+            ],
+            "success": true,
+            "value": {
+               "messageId": "eb3e439e-30d8-42e0-b802-2b9db484775e",
+               "status": "1000"
+            }  
+        }
+
+## Send SMS [/SendMessage]
+
+### SendMessage [POST]
+
+
++ Headers
+
+            email: email
+            apiKey: apiKey
+            
+            
++ Request (application/json)
+
+        {
+            "sender": "sender_name",
+            "message":"Hello test from API",
+            "messageInfos": [
+               {
+                  "distination": "53*******",
+                  "customMessage": "Custom message for a specific destination"
+               }
+              ],
+            "filterRepeatedNumbers": false,
+            "requestDeliveryReport": false
+        }
+        
++ Response 200 (application/json)
+
+        {   
+            "confirm": false,
+            "message": "string",
+            "modelStateErrors": [
+               "string"
+            ],
+            "success": true,
+            "value": {
+               "messageId": "eb3e439e-30d8-42e0-b802-2b9db484775e",
+               "status": "1000"
+            }  
+        }
+        
+## Send Message Query [/SendMessageQuery?sender=sendername&message=message&distination=number?messageTypeId=3]
+
+### SendMessageQuery [POST]
+
+ + Headers
+
+            email: email
+            apiKey: apiKey
+            
++ Request (application/json)
+
+    {
+        
+    }
+        
++ Response 200 (application/json)
+
+        {   
+            "confirm": false,
+            "message": "string",
+            "modelStateErrors": [
+               "string"
+            ],
+            "success": true,
+            "value": {
+               "messageId": "eb3e439e-30d8-42e0-b802-2b9db484775e",
+               "status": "1000"
+            }  
+        }
