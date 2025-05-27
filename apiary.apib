@@ -3,12 +3,12 @@ HOST: https://api.sureconnects.com/api/Message/
 
 # Sure Connect 
 
-Sure Connect SMS API is a simple way to send unlimited SMSs (Single & Bulk), schedule messages, deliver notifications, and personalize your communication.
+Sure Connect SMS API is a simple way to send unlimited SMSs (Single & Bulk), schedule messages, deliver notifications, and personalize your communication.<br/>
 This document provides information and resources for integrating Sure Connect via the HTTP interface, outlining the necessary parameters and instructions for using the SMS API effectively.
 
 ## HTTP(s) URL
 
-The SMS API is accessible through an HTTP connection (and its secure version) using the following base URLs for POST requests: 
+The SMS API is accessible through an HTTP connection (and its secure version) using the following base URLs for POST requests: <br/>
 Primary URLs: https://api.sureconnects.com/api/Message
 
 ## HTTP(s) Authentication:
@@ -18,15 +18,21 @@ This authentication process is facilitated through a unique API key assigned to 
 To ensure proper access, users should provide the API key as part of the submission process.
 
 ###To get the authentication key:
-Log in to our client portal https://console.sureconnects.com/auth/login
-From the main menu, open “Integration Settings/API Key”.
-In the field "Application Name," please enter a title for your system. 
-Click the “Save” button.
-The key will be automatically generated.
+Log in to our client portal https://console.sureconnects.com/auth/login<br/>
+From the main menu, open “Integration Settings/API Key”.<br/>
+In the field "Application Name," please enter a title for your system.<br/>
+Click the “Save” button.<br/>
+The key will be automatically generated.<br/>
 ###Use the authentication key that was generated in the previous step as follows:
-#### In the request header 
-##### email: your account email
-##### apiKey: YourApiKey 
+In the request header <br/>
+email: your account email<br/>
+apiKey: YourApiKey <br/>
+
+###HTTP(s) POST
+
+This section describes how to use Sure Connect SMS API through HTTP POST requests. <br/>
+A POST call requires providing the URL, the API Key, and the content format in the Header, while other parameters of the request are in the Body part:
+
 
 ## Send OTP Message [/SendOTPMessage]
 
@@ -63,6 +69,7 @@ The key will be automatically generated.
                "status": "1000"
             }  
         }
+
 
 ## Send SMS [/SendMessage]
 
